@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ponnora Retreat | Authentic Tamil Nadu Cuisine</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', 'Arial', sans-serif;
+        }
+        body {
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background-color: #fef6e4;
+        }
+        header {
+            background-color: rgba(211, 47, 47, 0.98);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #fff;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.4s ease-out;
+        }
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        .nav-links a:hover {
+            color: #ffebee;
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.8rem;
+            color: #fff;
+            transition: transform 0.3s;
+        }
+        .hamburger:hover {
+            transform: rotate(90deg);
+        }
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1601050690597-9e96304c9381?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 0;
+        }
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+        }
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+        .cta-button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+            animation: fadeIn 1s ease-out 0.9s both;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-button:hover {
+            background-color: #b71c1c;
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(183, 28, 28, 0.4);
+        }
+        .cta-button:active {
+            transform: translateY(1px);
+        }
+        .features {
+            display: flex;
+            justify-content: center;
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            background-color: #fff;
+        }
+        .feature-card {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            flex: 1;
+            min-width: 250px;
+            margin: 1rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .feature-card:nth-child(1) { transition-delay: 0.1s; }
+        .feature-card:nth-child(2) { transition-delay: 0.2s; }
+        .feature-card:nth-child(3) { transition-delay: 0.3s; }
+        .feature-card:hover {
+            transform: translateY(-10px) !important;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            color: #d32f2f;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: #333;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        .feature-card:hover h3 {
+            color: #d32f2f;
+        }
+        .menu {
+            padding: 6rem 5%;
+            background-color: #f9f5f0;
+            text-align: center;
+        }
+        .section-title {
+            margin-bottom: 3.5rem;
+            font-size: 2.5rem;
+            color: #333;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background: #d32f2f;
+            bottom: -15px;
+            left: 25%;
+            transition: width 0.4s ease-out;
+        }
+        .section-title:hover:after {
+            width: 60%;
+        }
+        .dish-gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .dish-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            width: 320px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .dish-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .dish-card:nth-child(1) { transition-delay: 0.1s; }
+        .dish-card:nth-child(2) { transition-delay: 0.2s; }
+        .dish-card:nth-child(3) { transition-delay: 0.3s; }
+        .dish-card:hover {
+            transform: translateY(-10px) scale(1.02) !important;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        .dish-img-container {
+            overflow: hidden;
+            height: 240px;
+        }
+        .dish-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease-out;
+        }
+        .dish-card:hover .dish-img {
+            transform: scale(1.1);
+        }
+        .dish-info {
+            padding: 1.8rem;
+        }
+        .dish-info h3 {
+            margin: 0.5rem 0;
+            color: #d32f2f;
+            font-size: 1.4rem;
+            transition: color 0.3s;
+        }
+        .dish-card:hover .dish-info h3 {
+            color: #b71c1c;
+        }
+        .dish-info p {
+            color: #666;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+        .price {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.3rem;
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: #f5f5f5;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        .dish-card:hover .price {
+            background: #d32f2f;
+            color: white;
+        }
+        .testimonials {
+            padding: 6rem 5%;
+            text-align: center;
+            background-color: #fff;
+        }
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .testimonial {
+            padding: 2.5rem;
+            display: none;
+            animation: fadeIn 0.8s ease;
+            background: #f9f5f0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        .testimonial.active {
+            display: block;
+        }
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+            line-height: 1.8;
+        }
+        .testimonial-author {
+            font-weight: bold;
+            color: #d32f2f;
+            font-size: 1.1rem;
+        }
+        .testimonial-nav {
+            margin-top: 2.5rem;
+        }
+        .testimonial-dot {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            background: #ddd;
+            border-radius: 50%;
+            margin: 0 7px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .testimonial-dot:hover {
+            transform: scale(1.2);
+        }
+        .testimonial-dot.active {
+            background: #d32f2f;
+            transform: scale(1.2);
+        }
+        .newsletter {
+            padding: 5rem 5%;
+            background-color: #d32f2f;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1606787366850-de6330128bfc?auto=format&fit=crop&w=1350&q=60') center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        .newsletter h2 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            font-size: 2.2rem;
+        }
+        .newsletter p {
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            position: relative;
+            z-index: 1;
+        }
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        .newsletter-input:focus {
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+        .newsletter-btn {
+            padding: 1rem 2rem;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .newsletter-btn:hover {
+            background: #222;
+            transform: scale(1.05);
+        }
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 4rem 5% 1.5rem;
+            position: relative;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-out;
+        }
+        .footer-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .footer-section:nth-child(1) { transition-delay: 0.1s; }
+        .footer-section:nth-child(2) { transition-delay: 0.2s; }
+        .footer-section:nth-child(3) { transition-delay: 0.3s; }
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            color: #d32f2f;
+            position: relative;
+            display: inline-block;
+        }
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            background: #d32f2f;
+            bottom: -8px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        .footer-section:hover h3:after {
+            width: 100%;
+        }
+        .footer-section p {
+            margin-bottom: 0.8rem;
+            color: #bbb;
+            transition: color 0.3s;
+        }
+        .footer-section:hover p {
+            color: #fff;
+        }
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+        }
+        .social-link {
+            color: white;
+            font-size: 1.4rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .social-link:hover {
+            color: #d32f2f;
+            transform: translateY(-3px) scale(1.1);
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: #bbb;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #d32f2f;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+            z-index: 999;
+            border: none;
+            outline: none;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            background: #b71c1c;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(183, 28, 28, 0.4);
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: #d32f2f;
+                flex-direction: column;
+                align-items: center;
+                padding: 1.5rem 0;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                animation: slideDown 0.4s ease-out;
+            }
+            @keyframes slideDown {
+                from { opacity: 0; transform: translateY(-20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links li {
+                margin: 1rem 0;
+            }
+            .hamburger {
+                display: block;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .hero-text {
+                text-align: center;
+            }
+            .newsletter-form {
+                flex-direction: column;
+            }
+            .newsletter-input {
+                border-radius: 30px;
+                margin-bottom: 1rem;
+                width: 100%;
+            }
+            .newsletter-btn {
+                border-radius: 30px;
+                width: 100%;
+            }
+            .feature-card, .dish-card {
+                min-width: 100%;
+                margin: 1rem 0;
+            }
+        }
+        .animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        .animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header id="header">
+        <div class="nav-container">
+            <a href="#" class="logo">Ponnora Retreat</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">☰</div>
+        </div>
+    </header>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Authentic Tamil Nadu Cuisine</h1>
+                <p>Experience the rich flavors and traditions of South India's culinary heritage</p>
+                <button class="cta-button" id="exploreBtn">Explore Menu</button>
+            </div>
+            <div class="hero-image">
+                <img src="D:\INTERN\CODSOFT\3.jpg" alt="Traditional Tamil Nadu meal">
+            </div>
+        </div>
+    </section>
+    <section class="features">
+        <div class="feature-card">
+            <div class="feature-icon">🍛</div>
+            <h3>Traditional Recipes</h3>
+            <p>Time-honored Tamil Nadu dishes prepared with authentic techniques</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">👨‍🍳</div>
+            <h3>Master Chefs</h3>
+            <p>Our culinary experts bring decades of regional cooking experience</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🌿</div>
+            <h3>Fresh Ingredients</h3>
+            <p>Locally-sourced spices and produce for authentic flavors</p>
+        </div>
+    </section>
+    <section class="menu" id="menu">
+        <h2 class="section-title">Our Signature Dishes</h2>
+        <div class="dish-gallery">
+            <div class="dish-card">
+                <div class="dish-img-container">
+                    <img src="D:\INTERN\CODSOFT\Chicken.jpg" alt="Chettinad Chicken Curry" class="dish-img">
+                </div>
+                <div class="dish-info">
+                    <h3>Chettinad Chicken Curry</h3>
+                    <p>Spicy chicken curry with authentic Chettinad masala blend and fresh curry leaves</p>
+                    <div class="price">₹350</div>
+                </div>
+            </div>
+            <div class="dish-card">
+                <div class="dish-img-container">
+                    <img src="D:\INTERN\CODSOFT\Dosa.jpg" alt="Masala Dosa" class="dish-img">
+                </div>
+                <div class="dish-info">
+                    <h3>Masala Dosa</h3>
+                    <p>Golden crispy dosa with spiced potato filling, served with sambar and chutneys</p>
+                    <div class="price">₹180</div>
+                </div>
+            </div>
+            <div class="dish-card">
+                <div class="dish-img-container">
+                    <img src="D:\INTERN\CODSOFT\Payasam.jpg" alt="Paruppu Payasam" class="dish-img">
+                </div>
+                <div class="dish-info">
+                    <h3>Paruppu Payasam</h3>
+                    <p>Traditional Tamil dessert made with lentils, jaggery and coconut milk</p>
+                    <div class="price">₹120</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="testimonials" id="about">
+        <h2 class="section-title">What Our Guests Say</h2>
+        <div class="testimonial-container">
+            <div class="testimonial active">
+                <p class="testimonial-text">The Chettinad Chicken Curry transported me back to my grandmother's kitchen in Chennai. The perfect balance of spices and heat!</p>
+                <p class="testimonial-author">- Priya S., Chennai</p>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial-text">As someone from Madurai, I can attest this is the most authentic Tamil meal I've had outside of my hometown. The flavors are perfect.</p>
+                <p class="testimonial-author">- Arjun K., Madurai</p>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial-text">The Paruppu Payasam brought tears to my eyes - it tasted just like my mother used to make. Thank you for preserving our culinary traditions.</p>
+                <p class="testimonial-author">- Lakshmi R., Coimbatore</p>
+            </div>
+            <div class="testimonial-nav">
+                <span class="testimonial-dot active" data-index="0"></span>
+                <span class="testimonial-dot" data-index="1"></span>
+                <span class="testimonial-dot" data-index="2"></span>
+            </div>
+        </div>
+    </section>
+    <section class="newsletter">
+        <h2>Join Our Culinary Journey</h2>
+        <p>Subscribe to receive updates on our seasonal Tamil Nadu menus and special events</p>
+        <form class="newsletter-form" id="newsletterForm">
+            <input type="email" placeholder="Your email address" class="newsletter-input" required>
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+        </form>
+    </section>
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Hours</h3>
+                <p>Monday - Friday: 11:30am - 10:00pm</p>
+                <p>Saturday - Sunday: 11:00am - 11:00pm</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>45 Anna Salai Road</p>
+                <p>Nungambakkam, Chennai</p>
+                <p>Tamil Nadu 600034</p>
+                <p>+91-44-42333333</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link">📷 Instagram</a>
+                    <a href="#" class="social-link">👍 Facebook</a>
+                    <a href="#" class="social-link">🐦 Twitter</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Ponnora Retreat. All rights reserved.</p>
+        </div>
+    </footer>
+    <button class="back-to-top" id="backToTop">↑</button>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                navLinks.classList.remove('active');
+                hamburger.textContent = '☰';
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        const testimonials = document.querySelectorAll('.testimonial');
+        const dots = document.querySelectorAll('.testimonial-dot');
+        let currentTestimonial = 0;
+        let testimonialInterval;
+        function showTestimonial(index) {
+            testimonials.forEach(t => t.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            testimonials[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentTestimonial = index;
+            clearInterval(testimonialInterval);
+            testimonialInterval = setInterval(() => {
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(currentTestimonial);
+            }, 6000);
+        }
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => showTestimonial(parseInt(dot.getAttribute('data-index'))));
+        });
+        testimonialInterval = setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }, 6000);
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('show', window.pageYOffset > 300);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                header.style.backgroundColor = 'rgba(183, 28, 28, 0.98)';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.2)';
+            } else {
+                header.style.backgroundColor = 'rgba(211, 47, 47, 0.98)';
+                header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.2)';
+            }
+        });
+        const newsletterForm = document.getElementById('newsletterForm');
+        newsletterForm.addEventListener('submit', e => {
+            e.preventDefault();
+            const email = newsletterForm.querySelector('input').value;
+            const confirmation = document.createElement('div');
+            confirmation.style.cssText = 'position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #4CAF50; color: white; padding: 15px 30px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; animation: fadeInUp 0.5s ease-out';
+            confirmation.textContent = `Thank you for subscribing with ${email}!`;
+            document.body.appendChild(confirmation);
+            setTimeout(() => {
+                confirmation.style.animation = 'fadeOut 0.5s ease-out';
+                setTimeout(() => document.body.removeChild(confirmation), 500);
+            }, 3000);
+            newsletterForm.reset();
+        });
+        const exploreBtn = document.getElementById('exploreBtn');
+        exploreBtn.addEventListener('click', () => {
+            document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+        });
+        function checkVisibility() {
+            const elements = document.querySelectorAll('.feature-card, .dish-card, .footer-section');
+            elements.forEach((el, index) => {
+                const pos = el.getBoundingClientRect().top;
+                if (pos < window.innerHeight / 1.2) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+        window.addEventListener('load', checkVisibility);
+        window.addEventListener('scroll', checkVisibility);
+        document.querySelector('.hero h1').style.animation = 'fadeInUp 1s ease-out 0.3s both';
+        document.querySelector('.hero p').style.animation = 'fadeIn 1s ease-out 0.6s both';
+        document.querySelector('.cta-button').style.animation = 'fadeIn 1s ease-out 0.9s both';
+    </script>
+</body>
+</html>
